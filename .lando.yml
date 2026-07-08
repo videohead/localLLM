@@ -1,0 +1,25 @@
+name: localLLM
+ollama:
+    api: 3
+    type: lando
+    app_mount: false
+    services:
+      image: ollama/ollama:latest
+      command: ollama serve
+      gpus:
+        - driver: nvidia
+          count: all
+          capabilities:
+            - gpu
+      environment:
+        OLLAMA_BASE_URL: http://127.0.0.1:11434
+        OLLAMA_MODEL: qwen2.5-coder:7b
+        NVIDIA_VISIBLE_DEVICES: all
+        NVIDIA_DRIVER_CAPABILITIES: compute,utility
+      ports:
+        - "11434"
+      volumes:
+        - ~/.ollama:/root/.ollama
+
+
+    
